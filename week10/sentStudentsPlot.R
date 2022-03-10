@@ -47,11 +47,8 @@ europeCoords$nationality <- countryCodes$code[match(europeCoords$region,countryC
 #empty list to store yearly plots in 
 years = c("2014-2015","2015-2016","2016-2017","2017-2018", "2018-2019", "2019-2020")
 listID = list()
-plot = 1
 
 #Plotting the map
-
-counter = 1
 for (year in years){
   sentStudents = erasmus%>%
     subset(academic_year == year)%>%
