@@ -66,15 +66,15 @@ for (year in years){
     scale_fill_viridis_c(name = "Number of Students", option = "magma") +
     labs(title = "Yearly Erasmus Students Sent by Each European Country",
          subtitle = year,
-         caption = "\nData: Data.Europa| Plot: @AntoniaPopescu | #TidyTuesday") +
+         caption = "\nData: Data.Europa| Plot: @AntoniaPopes | #TidyTuesday") +
     theme_void()+
     theme(text = element_text(family="Junge"),
           legend.position = "right",
           legend.text = element_text(size=12),
           plot.background = element_rect(fill = "#FAF0F0",color=NA),
           plot.title = element_text(size=20, face='bold'),
-          plot.subtitle = element_text(size=14),
-          plot.caption = element_text(size=12),
+          plot.subtitle = element_text(size=14, hjust = 0),
+          plot.caption = element_text(size=12, hjust = 0),
           plot.margin = margin(1,1,1,1, unit = "cm"))
   ggsave(sentMap,filename=paste("sentMap",year,".png",sep=""))
 }
