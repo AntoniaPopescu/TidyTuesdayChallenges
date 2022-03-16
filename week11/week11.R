@@ -65,7 +65,7 @@ tidyVignettes = ggplot(data, aes(x = year, y = rmdVignettes, fill = package))+
         panel.grid.minor = element_blank(), 
         panel.ontop = TRUE)
 
-ggsave(tidyVignettes,filename="tidyVignettes.png")
+ggsave(tidyVignettes,filename="tidyVignettes.png", width = 1080, height = 1350, units = "px")
 
 #other attempted plots  
 ggplot(data, aes(x = year, y = rmdVignettes, group = package, fill = package))+

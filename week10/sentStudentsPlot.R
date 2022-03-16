@@ -69,9 +69,9 @@ for (year in years){
           legend.position = "right",
           legend.text = element_text(size=12),
           plot.background = element_rect(fill = "#FAF0F0",color=NA),
-          plot.title = element_text(size=20, face='bold'),
-          plot.subtitle = element_text(size=14, hjust = 0),
-          plot.caption = element_text(size=12, hjust = 0),
+          plot.title = element_text(size=36, face='bold'),
+          plot.subtitle = element_text(size=24, hjust = 0),
+          plot.caption = element_text(size=16, hjust = 0),
           plot.margin = margin(1,1,1,1, unit = "cm"))
   ggsave(sentMap,filename=paste("sentMap",year,".png",sep=""))
 }
