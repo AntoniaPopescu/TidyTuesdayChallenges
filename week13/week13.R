@@ -2,8 +2,7 @@ library(tidyverse)
 library(showtext)
 library(ggplot2)
 library(dplyr)
-library(tidyverse)
-library(showtext)
+
 library(geofacet)
 
 
