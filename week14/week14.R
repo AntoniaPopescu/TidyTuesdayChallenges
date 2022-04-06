@@ -74,7 +74,7 @@ p = waffle(news, rows = 28)  + theme_void() +
                                 margin = margin(10, 0, 10, 0)),
     plot.margin = margin(1, 1, 1, 1, unit = "cm"),
     legend.key.size = unit(2, "cm"),
-    legend.key.width = unit(0.5, "cm")
+    legend.key.width = unit(0.5, "cm"),
   )
 p
 
