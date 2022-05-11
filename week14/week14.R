@@ -58,7 +58,7 @@ colors = met.brewer("Klimt", 7)
 p = waffle(news, rows = 28)  + theme_void() +
   scale_fill_manual(values = colors) +
   labs(title = "Underrepresented communities \nin the Media",
-       subtitle = "Digital Publications that serve underrepresnted communities",
+       subtitle = "Number of digital Publications that serve underrepresnted communities",
        caption = "Data: Project Oasis | Plot: @AntoniaPopes | #TidyTuesday") +
   theme(
     text = element_text(family = "Merriweather"),
