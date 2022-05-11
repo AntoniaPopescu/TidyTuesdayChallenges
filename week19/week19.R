@@ -64,7 +64,7 @@ authorPlot = ggplot(decadeCounts, aes(x = decade, y = authorCount, fill = decade
   theme_void() +
   labs(title = "\n\n\n\n\nNY Times authors through the decades ",
        subtitle = "\n Each book, rapresenting each decade, is annotated with:\n\n   - Top: book per author ratio\n\n   - Middle: number of authors in the list each decade\n\n   - Bottom: decade",
-       caption = "Data: Onthesnow.co.uk | Plot: @AntoniaPopes | #TidyTuesday") +
+       caption = "Data: Post45 Data | Plot: @AntoniaPopes | #TidyTuesday") +
   theme(
     text = element_text(family = "Abril Fatface"),
     plot.subtitle = element_text(margin = margin(10, 0, 10, 0), size = 12),
