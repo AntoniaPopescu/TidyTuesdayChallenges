@@ -37,51 +37,51 @@ eurovision_geo <- rnaturalearthdata::countries50 %>%
   mutate(NAME = case_when(NAME == "United Kingdom" ~ "UK",
                            T ~ NAME))
 
-ranking <- st_geometry(eurovision_geo) %>% 
+country_rankinging <- st_geometry(eurovision_geo) %>% 
   st_point_on_surface() %>% 
   st_coordinates() %>% 
   as_tibble() %>% 
-  bind_cols(tibble(fine_rank = normalize(rank(eurovision_geo$winnings),range = c(40.12161, 66.12161), method = "range"),
+  bind_cols(tibble(country_cluster = normalize(rank(eurovision_geo$winnings),range = c(40.12161, 66.12161), method = "range"),
                    country = eurovision_geo$NAME,
                    xend = 60,
                    x_axis_start = xend + 10,
-                   fine_rank_x = normalize(eurovision_geo$winnings, range = c(first(x_axis_start), 100), method = "range"),
+                   country_cluster_x = normalize(eurovision_geo$winnings, range = c(first(x_axis_start), 100), method = "range"),
                    val_txt = paste0(format(eurovision_geo$winnings, digits = 0, nsmall = 2)),
                    val_txt2 = if_else(country == "Ireland", paste0(val_txt, "  total victories"), val_txt))) %>% 
-  arrange(desc(fine_rank))
+  arrange(desc(country_cluster))
 
 
-ranking$rank = 66.12161
+country_rankinging$country_ranking = 66.12161
 
-fine_rank = 66.12161
+country_cluster = 66.12161
 
 for (i in 1: 24){
-ranking[i, 10] = fine_rank
-fine_rank = fine_rank - 1.40541
+country_rankinging[i, 10] = country_cluster
+country_cluster = country_cluster - 1.40541
 }
 
 eurovision_geo <- eurovision_geo %>% 
-  bind_cols(ranking %>% select(fine_rank))
+  bind_cols(country_rankinging %>% select(country_cluster))
 
 
 #plot
 ggplot() + 
-  geom_sf(data = eurovision_geo, size = .3, fill = "transparent", color = "#4e216e") +
+  geom_sf(data = eurovision_geo, size = .3, fill = "transparent", color = "#8152a1") +
   # Sigmoid from country to start of barchart
-  geom_sigmoid(data = ranking, 
-               aes(x = X, y = Y, xend = x_axis_start - .2, yend = rank, group = country, color = fine_rank), 
+  geom_sigmoid(data = country_rankinging, 
+               aes(x = X, y = Y, xend = x_axis_start - .2, yend = country_ranking, group = country, color = country_cluster), 
                alpha = .6, smooth = 10, size = 1.3) + 
   # Line from xstart to value
-  geom_segment(data = ranking, 
-               aes(x = x_axis_start, y = rank, xend = fine_rank_x, yend = rank, color = fine_rank), alpha = .6, size = 1.5, 
+  geom_segment(data = country_rankinging, 
+               aes(x = x_axis_start, y = country_ranking, xend = country_cluster_x, yend = country_ranking, color = country_cluster), alpha = .6, size = 1.5, 
                lineend = "round") + 
   # dot on centroid of country in map
-  geom_point(data = ranking, 
-             aes(x = X, y = Y, color = fine_rank), size = 5) +
+  geom_point(data = country_rankinging, 
+             aes(x = X, y = Y, color = country_cluster), size = 5) +
   # Country text
-  geom_text(data = ranking, aes(x = x_axis_start-.5, y = rank, label = country, color = fine_rank), hjust = 1, size = 3.5, nudge_y = .5, fontface='bold') +
+  geom_text(data = country_rankinging, aes(x = x_axis_start-.5, y = country_ranking, label = country, color = country_cluster), hjust = 1, size = 3.5, nudge_y = .5, fontface='bold') +
   # Value text
-  geom_text(data = ranking, aes(x = fine_rank_x, y = rank, label = val_txt2, color = fine_rank), hjust = 0, size = 4, nudge_x = .4) +
+  geom_text(data = country_rankinging, aes(x = country_cluster_x, y = country_ranking, label = val_txt2, color = country_cluster), hjust = 0, size = 4, nudge_x = .4) +
   coord_sf(clip = "off") +
   scale_fill_viridis(option="plasma")+
   scale_color_viridis(option="plasma")+
